@@ -17,6 +17,10 @@ const {
     getMonitorHistory
 } = require("../controllers/monitorHistoryController");
 
+const {
+    getMonitorIncidents
+} = require("../controllers/incidentController");
+
 // Create a monitor
 router.post("/", createMonitor);
 
@@ -31,5 +35,8 @@ router.get("/:monitorId/check", runMonitorCheck);
 
 // Get monitoring history
 router.get("/:monitorId/history", getMonitorHistory);
+
+// Get incident history
+router.get("/:monitorId/incidents", getMonitorIncidents);
 
 module.exports = router;
