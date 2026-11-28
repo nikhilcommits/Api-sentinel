@@ -5,7 +5,8 @@ const router = express.Router();
 
 const {
     createMonitor,
-    getMonitors
+    getMonitors,
+    updateMonitor
 } = require("../controllers/monitorController");
 
 const {
@@ -21,6 +22,9 @@ router.post("/", createMonitor);
 
 // Get all monitors
 router.get("/", getMonitors);
+
+// update a monitor
+router.put("/:monitorId", updateMonitor);
 
 // Check a monitor
 router.get("/:monitorId/check", runMonitorCheck);

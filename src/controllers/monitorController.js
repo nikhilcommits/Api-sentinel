@@ -1,7 +1,7 @@
 
 const Monitor = require("../models/Monitor");
 
-
+// CREATE MONITOR
 const createMonitor = async (req, res) => {
     try {
         const monitor = await Monitor.create(req.body);
@@ -20,6 +20,7 @@ const createMonitor = async (req, res) => {
 };
 
 
+// GET ALL MONITORS
 const getMonitors = async (req, res) => {
     try {
         const monitors = await Monitor.find();
@@ -38,8 +39,40 @@ const getMonitors = async (req, res) => {
 };
 
 
+// UPDATE MONITOR
+const updateMonitor = async (req, res) => {
+    try {
+        const monitor = await Monitor.findByIdAndUpdate(
+            req.params.monitorId,
+            req.body,
+            {
+                returnDocument: "after",
+                runValidators: true
+            }
+        );
+
+        if (!monitor) {
+            return res.status(404).json({
+                message: "Monitor not found"
+            });
+        }
+
+        res.status(200).json({
+            message: "Monitor updated successfully",
+            monitor
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Failed to update monitor",
+            error: error.message
+        });
+    }
+};
+
 
 module.exports = {
     createMonitor,
-    getMonitors
+    getMonitors,
+    updateMonitor
 };
